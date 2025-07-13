@@ -1,0 +1,131 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+
+
+        <!-- Main Content -->
+        <div class="col-md-10 py-4">
+            <!-- Dashboard Cards -->
+            <div id="dashboard" class="content-section active">
+                <h2 class="mb-4">Dashboard Overview</h2>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-primary text-white">
+                            <div class="card-body">
+                                <h6>Total Projects</h6>
+                                <h4>{{ total_projects }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-success text-white">
+                            <div class="card-body">
+                                <h6>Total Properties</h6>
+                                <h4>{{ total_properties }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-info text-white">
+                            <div class="card-body">
+                                <h6>Available Units</h6>
+                                <h4>{{ available_units }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-danger text-white">
+                            <div class="card-body">
+                                <h6>Booked Units</h6>
+                                <h4>{{ booked_units }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-warning text-dark">
+                            <div class="card-body">
+                                <h6>Total Builders</h6>
+                                <h4>{{ total_builders }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-secondary text-white">
+                            <div class="card-body">
+                                <h6>Total Agents</h6>
+                                <h4>{{ total_agents }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="card bg-dark text-white">
+                            <div class="card-body">
+                                <h6>Total Customers</h6>
+                                <h4>{{ total_customers }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contacts Table -->
+            <div id="contacts" class="content-section">
+                <h2 class="mb-4">Contact Information</h2>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped bg-white">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contact in contacts %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ contact.name }}</td>
+                                <td>{{ contact.email }}</td>
+                                <td>{{ contact.phone }}</td>
+                                <td>{{ contact.message }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center">No contact data available.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Image Gallery -->
+            <div id="images" class="content-section">
+                <h2 class="mb-4">Uploaded Images</h2>
+                <div class="row">
+                    {% for img in images %}
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="{{ img.image.url }}" class="gallery-img card-img-top" alt="Image">
+                            <div class="card-body">
+                                <p class="card-text">{{ img.caption }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="col-12">
+                        <p>No images uploaded.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

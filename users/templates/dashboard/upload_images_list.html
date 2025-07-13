@@ -1,0 +1,124 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow rounded-4">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">Uploaded Images</h4>
+                    <a href="/upload-img/" class="btn btn-light btn-sm">+ Upload New</a>
+                </div>
+                <div class="card-body">
+                    {% if images %}
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped align-middle text-center">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Site</th>
+                                        <th>Title</th>
+                                        <th>Image</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for image in images %}
+                                        <tr>
+                                            <td>{{ forloop.counter0|add:images.start_index }}</td>
+                                            <td>{{ image.site }}</td>
+                                            <td>{{ image.title }}</td>
+                                            <td>
+                                                {% if image.image.url %}
+                                                    <img src="{{ image.image.url }}" alt="{{ image.title }}" width="80" height="60" class="rounded shadow-sm">
+                                                {% else %}
+                                                    No Image
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="/images-update/{{ image.id }}/" class="btn btn-warning btn-sm">Edit</a>
+
+                                                <!-- Trigger Modal -->
+                                                <button type="button"
+                                                        class="btn btn-danger btn-sm"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteModal{{ image.id }}">
+                                                    Delete
+                                                </button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="deleteModal{{ image.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ image.id }}" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-top">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header bg-danger text-white">
+                                                                <h5 class="modal-title" id="deleteModalLabel{{ image.id }}">Confirm Deletion</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to delete "<strong>{{ image.title }}</strong>"?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <form method="post" action="{% url 'image_delete' image.id %}">
+                                                                    {% csrf_token %}
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" class="btn btn-danger">Yes, Delete</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- End Modal -->
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Pagination -->
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                {% if images.has_previous %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page=1">&laquo; First</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ images.previous_page_number }}">Previous</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled"><span class="page-link">&laquo; First</span></li>
+                                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                                {% endif %}
+
+                                {% for num in images.paginator.page_range %}
+                                    {% if images.number == num %}
+                                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                                    {% elif num >= images.number|add:"-2" and num <= images.number|add:"2" %}
+                                        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if images.has_next %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ images.next_page_number }}">Next</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ images.paginator.num_pages }}">Last &raquo;</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled"><span class="page-link">Next</span></li>
+                                    <li class="page-item disabled"><span class="page-link">Last &raquo;</span></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                        <!-- End Pagination -->
+
+                    {% else %}
+                        <p class="text-muted text-center">No images have been uploaded yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

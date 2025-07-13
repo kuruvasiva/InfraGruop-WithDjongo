@@ -1,0 +1,274 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Iconic Infra Group</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .top-banner {
+      position: relative;
+      height: 100vh;
+      background-image: url('images/ifg.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .branding {
+      position: absolute;
+       top: 3px; 
+      left:-1%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .branding img {
+      height: 100px;
+      margin-right: 10px;
+    }
+
+    .branding h3 {
+      font-size: 26px;
+      margin: 0;
+      font-weight: bold;
+      color: #ff6600;
+    }
+
+    .branding h3 span {
+      color: #4b0082;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 20px;
+      right: 5%;
+      z-index: 2;
+      font-size: 26px;
+    }
+
+    .nav-links a {
+      color: #003366;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .branding-text {
+      position: absolute;
+      top: 420px;
+      left: 16%;
+      z-index: 2;
+      font-size: 45px;
+      font-weight: bold;
+      color: rgb(36, 30, 30);
+      text-shadow: 2px 3px 6px white, 0px 0px 6px white;
+      max-width: 90%;
+      line-height: 1.2;
+    }
+
+    .branding-text span {
+      display: block;
+      font-size: 50px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .person-img {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: auto;
+      height: 50%;
+      max-height: 70%;
+      z-index: 1;
+    }
+
+    /* Large tablets */
+    @media (max-width: 992px) {
+      .branding h3 {
+        font-size: 22px;
+      }
+      .branding-text {
+        font-size: 43px;
+         left: 3%;
+        top: 440px;
+      }
+      .branding-text span {
+        font-size: 40px;
+      }
+      .person-img {
+        height: 45%;
+      }
+    }
+
+    /* Tablets */
+    @media (max-width: 768px) {
+      .top-banner {
+        height: 100vh;
+      }
+
+      .branding {
+        top: 20px;
+        left: 5%;
+      }
+
+      .nav-links {
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+      }
+
+      .branding-text {
+        font-size: 38px;
+        top: 320px;
+      }
+
+      .branding-text span {
+        font-size: 38px;
+      }
+
+      .person-img {
+        height: 35%;
+      }
+    }
+
+    /* Mobile Phones */
+    @media (max-width: 576px) {
+      .branding img {
+        height: 70px;
+      }
+      .branding {
+        top: 40px;
+        left: 2%;
+      }
+
+      .branding h3 {
+        font-size: 18px;
+      }
+      .nav-links {
+      
+        font-size: 16px;
+      }
+      .branding-text {
+        font-size: 30px;
+        top: 250px;
+      }
+      .branding-text span {
+        font-size: 30px;
+      }
+      .person-img {
+        height: 35%;
+      }
+    }
+    /* Small Mobile Phones */
+      @media (max-width: 506px) {
+      
+      .branding {
+        top: 55px;
+        left: 2%;
+      }
+      .nav-links {
+        font-size: 18px;
+      }    }
+  </style>
+
+</head>
+<body>
+  <!-- Main Banner -->
+  <div class="container-fluid top-banner p-0">
+    <!-- Branding -->
+    <div class="branding">
+      <img src="{% static '/images/medhini logo.png' %}" alt="Company Logo">
+      
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <!-- Dropdown container -->
+  <div class="dropdown d-inline-block">
+    <a class="dropdown-toggle" href="/projects/" role="button" id="projectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      Projects
+    </a>
+    <ul class="dropdown-menu" id="projectList" aria-labelledby="projectDropdown" style="min-width: 200px;">
+      <li draggable="true"><a class="dropdown-item" href="/projects/">OnGoing Projects</a></li>
+      <li draggable="true"><a class="dropdown-item" href="#upcoming">Upcoming Projects</a></li>
+    </ul>
+  </div>
+      <a href="/gallery/">Gallery</a>
+      <a href="/contact/">Contact</a>
+      {% if user.is_authenticated %}
+          <a href="/logout/">Logout</a>
+      {% else %}
+          <a href="/login/">Login</a>
+      {% endif %}
+
+    </div>
+
+    <!-- Banner Text -->
+    <div class="branding-text">
+      Open plots: your blank canvas<br>
+      <span>for a dream home or<br> smart investment</span>
+    </div>
+
+    <!-- Person Image -->
+    <img src="{% static 'images/person_f.png' %}" alt="Person" class="person-img">
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  const projectList = document.getElementById('projectList');
+  let draggedItem = null;
+
+  projectList.addEventListener('dragstart', function (e) {
+    draggedItem = e.target;
+    e.target.classList.add('dragging');
+  });
+
+  projectList.addEventListener('dragend', function (e) {
+    e.target.classList.remove('dragging');
+    draggedItem = null;
+  });
+
+  projectList.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(projectList, e.clientY);
+    if (afterElement == null) {
+      projectList.appendChild(draggedItem);
+    } else {
+      projectList.insertBefore(draggedItem, afterElement);
+    }
+  });
+
+  function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('li:not(.dragging)')];
+
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+  
+</script>
+
+</body>
+</html>

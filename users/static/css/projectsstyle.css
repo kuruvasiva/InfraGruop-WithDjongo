@@ -1,0 +1,118 @@
+ .main-text{
+    padding-top: 130px;
+ }
+ .main-text h2{
+    font-size: 60px;
+    line-height: 1;
+    text-align: center;
+ }
+ .main-text h2 span {
+    color: darkblue;
+ }
+ .project-content{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(359px, auto));
+    gap: 20px;
+    margin: 20px;
+ }
+ .row{
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+ }
+ .row img{
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.5s;
+
+ }
+ .layer{
+    width: 100%;
+    height: 0;
+    /* background: linear-gradient(rgba(0,0,0,0.1),rgb(36, 36, 194)); */
+    position: absolute;
+    border-radius: 8px;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 40px;
+    transition: height 0.5s;
+ }
+ .layer h5{
+    color: #000;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding: 5px;
+ }
+ .layer p{
+    color: #000;
+    font-size: 1rem;
+    line-height: 1.8;
+ }
+ .layer i{
+    color: #ff004f;
+    margin-top: 20px;
+    font-size: 20px;
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+ }
+ .row:hover img{
+    transform: scale(1.0);
+ }
+ .row:hover .layer{
+    height: 100%;
+ }
+
+ .projectHighlight{
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: column;
+ }
+ .projectHighlight h1{
+    flex-wrap: wrap;
+   color: red;
+ }
+/* Button logo  --------------------------------------------------------------- */
+.logo-btn {
+      padding: 12px 18px;
+      background: #fff;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 2px 2px 6px #aaa;
+      max-width: 380px;
+      width: 90%;
+      margin-left: 50px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .logo-btn small { color: orangered; font-weight: bold; }
+    .logo-btn h1 { color: darkorange; font-size: 28px; display: inline; }
+    .logo-btn span {
+      font-family: 'Pacifico', cursive;
+      color: green;
+      font-size: 24px;
+      display: inline;
+    }
+    .tagline { font-size: 11px; color: gray; margin-left: 4px; display: block; }
+    .place { color: #1E2EFF; font-weight: bold; font-size: 14px; margin-top: 6px; display: block; }
+
+    @media(max-width: 480px) {
+      .logo-btn h1 { font-size: 22px; }
+      .logo-btn span { font-size: 18px; }
+      .place { font-size: 12px; }
+    }

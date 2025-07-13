@@ -1,0 +1,403 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iconic Infra Group</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .top-banner {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+    }
+
+    .branding {
+      position: absolute;
+      top: 6px;
+      left: 5%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .branding img {
+      height: 100px;
+      margin-right: 10px;
+    }
+
+    .branding h3 {
+      font-size: 26px;
+      margin: 0;
+      font-weight: bold;
+      color: #ff6600;
+    }
+
+    .branding h3 span {
+      color: #4b0082;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 20px;
+      right: 5%;
+      z-index: 2;
+      font-size: 26px;
+    }
+
+    .nav-links a {
+      color: #003366;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .branding-text {
+      position: absolute;
+      top: 420px;
+      left: 14%;
+      z-index: 2;
+      font-size: 50px;
+      font-weight: bold;
+      color: rgb(36, 30, 30);
+      text-shadow: 2px 3px 6px white, 0px 0px 6px white;
+      max-width: 90%;
+      line-height: 1.2;
+    }
+
+    .branding-text span {
+      display: block;
+      font-size: 50px;
+      font-weight: bold;
+      margin-top: 50px;
+    }
+    .main-text{
+    padding-top: 70px;
+    } 
+
+    .project-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 15px;
+      margin-top: 50px;
+    }
+
+    .row {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .row img {
+      border-radius: 8px;
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s;
+    }
+
+    .layer {
+      width: 100%;
+      height: 0;
+      position: absolute;
+      border-radius: 8px;
+      left: 0;
+      bottom: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 20px;
+      transition: height 0.5s;
+      /* background: rgba(255,255,255,0.9); */
+    }
+
+    .layer h5 {
+      color: #000;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .layer p {
+      color: #000;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .layer i {
+      color: #ff004f;
+      margin-top: 15px;
+      font-size: 20px;
+      background: #fff;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .row:hover img {
+      transform: scale(1.03);
+    }
+
+    .row:hover .layer {
+      height: 100%;
+    }
+
+    .projectHighlight {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .blueprint img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .projectHighlight h1 {
+      color: red;
+      margin: 20px 0 10px;
+      font-size: 28px;
+    }
+
+    .projectHighlight ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 900px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .projectHighlight ul li {
+      margin-bottom: 8px;
+    }
+   .projectHighlight h2{
+    font-weight: 20px;
+    color:#3d0d5f ;
+   }
+
+    button.logo-btn {
+      background-color: #f4f4f4;
+      border: none;
+      padding: 15px;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 16px;
+      color: #000;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .logo-btn h1 {
+      margin: 0;
+      font-size: 22px;
+      color: #ff6600;
+    }
+
+    .logo-btn span {
+      color: #4b0082;
+    }
+
+    .tagline, .place {
+      font-size: 14px;
+    }
+
+    @media (max-width: 576px) {
+      .branding img {
+        height: 60px;
+      }
+
+      .branding h3 {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        font-size: 14px;
+        top: 0px;
+      }
+
+      .branding-text {
+        font-size: 24px;
+        top: 250px;
+      }
+
+      .branding-text span {
+        font-size: 24px;
+      }
+
+      .projectHighlight h1 {
+        font-size: 20px;
+      }
+
+      .projectHighlight ul {
+        font-size: 14px;
+        padding: 0 10px;
+      }
+
+
+      .project-content {
+        margin-top: 10px;
+        gap: 5px;
+      }
+
+      .row img {
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid top-banner p-0">
+    <div class="branding">
+      <img src="{% static 'images/logo.png' %}" alt="Logo" />
+      <h3>ICONIC <span>INFRA GROUP</span></h3>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+     <div class="dropdown d-inline-block">
+    <a class="dropdown-toggle" href="#" role="button" id="projectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      Projects
+    </a>
+    <ul class="dropdown-menu" id="projectList" aria-labelledby="projectDropdown" style="min-width: 200px;">
+      <li draggable="true"><a class="dropdown-item" href="/projects/">OnGoing Projects</a></li>
+      <li draggable="true"><a class="dropdown-item" href="#upcoming">Upcoming Projects</a></li>
+    </ul>
+  </div>
+      <a href="/gallery/">Gallery</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <br><br>
+      <section id="choteppall">
+        <div class="projectHighlight">
+          <h2>Choutuppal Site</h2>
+           
+         <h2 class="text-center">Choutuppal Site Images</h2>
+    <div class="row g-3">
+      <div class="col-12 col-sm-6 col-md-4">
+        <img src="{% static 'images/chotepall/cp1.jpg' %}" class="img-fluid" alt="">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <img src="{% static 'images/chotepall/cp2.jpg' %}" class="img-fluid  w-100" style="max-height: 250px;" alt="">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <img src="{% static 'images/chotepall/cp3.jpg' %}" class="img-fluid"  alt="">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <img src="{% static 'images/chotepall/cp4.jpg' %}" class="img-fluid" alt="">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <img src="{% static 'images/chotepall/cp5.jpg' %}" class="img-fluid" alt="">
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <img src="{% static 'images/chotepall/cp6.jpg' %}" class="img-fluid" alt="">
+      </div>
+    </div>
+     <br><br>
+    <div class="row">
+    <!-- Project Highlights -->
+    <div class="col-12 col-md-6">
+      <h3 class="text-danger">Project Highlights</h3>
+      <ul>
+        <li>HMDA Approved Layout & TS RERA Project</li>
+        <li>100 Feet Facing Road Project</li>
+        <li>Clear Title as per Vaasthu</li>
+        <li>60, 50, 40, 33, 30 BT Roads</li>
+        <li>Underground Drainage</li>
+        <li>Overhead water tank with water supply lines</li>
+        <li>Electricity lines with Street Lights and Transformers</li>
+        <li>Cycling track</li>
+        <li>Rain water Harvesting Pits</li>
+        <li>Well Developed Parks & Landscape Gardening</li>
+        <li>Parks and Open Spaces</li>
+        <li>Ready for Construction</li>
+        <li>Avenue Plantation</li>
+        <li>Proposed 8 Line Express Highway from L.B. Nagar to Choutuppal</li>
+      </ul>
+    </div>
+
+    <!-- Location Highlights -->
+    <div class="col-12 col-md-6">
+      <h3 class="text-danger">Location Highlights</h3>
+      <ul>
+        <li>Beside Proposed 300' Regional Ring Road</li>
+        <li>20 Min. Drive From ORR</li>
+        <li>Near to Many Schools & Engineering College</li>
+        <li>Future plan of High Speed Train</li>
+        <li>Closer To Dandumalkapur Green Industrial Park</li>
+        <li>Closer To Pharmaceuticals and Laboratories Like SRINI, DIVIS, NOSCH</li>
+        <li>Closer To Proposed Dry Port</li>
+        <li>Proposed L.B. Nagar to Choutuppal Metro Rail</li>
+      </ul>
+    </div>
+  </div>
+        </div>
+
+    <div class="blueprint">
+       <img src="{% static 'images/chotepalliImages/cphl.jpg' %}" alt="Choteppalle" />
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  const projectList = document.getElementById('projectList');
+  let draggedItem = null;
+
+  projectList.addEventListener('dragstart', function (e) {
+    draggedItem = e.target;
+    e.target.classList.add('dragging');
+  });
+
+  projectList.addEventListener('dragend', function (e) {
+    e.target.classList.remove('dragging');
+    draggedItem = null;
+  });
+
+  projectList.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    const afterElement = getDragAfterElement(projectList, e.clientY);
+    if (afterElement == null) {
+      projectList.appendChild(draggedItem);
+    } else {
+      projectList.insertBefore(draggedItem, afterElement);
+    }
+  });
+
+  function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('li:not(.dragging)')];
+
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+  </script>
+
+
+
+</body>
+</html>

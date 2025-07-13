@@ -1,0 +1,43 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow rounded-4">
+                <div class="card-header bg-primary text-dark">
+                    <h4 class="mb-0">Update Image</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Site:</label>
+                            <select class="form-select" name="site">
+                                {% for value, label in image_obj.SITE_CHOICES %}
+                                    <option value="{{ value }}" {% if image_obj.site == value %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Title:</label>
+                            <input type="text" name="title" class="form-control" value="{{ image_obj.title }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Replace Image (optional):</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

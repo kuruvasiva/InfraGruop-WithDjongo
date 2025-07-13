@@ -1,0 +1,46 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Upload Images</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="site" class="form-label fw-semibold">Select Site</label>
+                            <select name="site" id="site" class="form-select" required>
+                                <option value="" disabled selected>-- Select Site --</option>
+                                <option value="Choutuppal">Choutuppal</option>
+                                <option value="Yacharam">Yacharam</option>
+                                <option value="Kothur">Kothur</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="title" class="form-label fw-semibold">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder="Enter title" >
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="images" class="form-label fw-semibold">Upload Images</label>
+                            <input type="file" name="images" id="images" class="form-control" multiple required>
+                            <div class="form-text">You can select multiple images</div>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

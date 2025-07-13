@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gallery - Iconic Infra Group</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .branding {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #f8f9fa;
+    }
+
+    .branding img {
+      height: 80px;
+      margin-right: 10px;
+    }
+
+    .nav-links {
+      margin-left: auto;
+    }
+
+    .nav-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #003366;
+      font-weight: 500;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown-menu a {
+      font-size: 16px;
+    }
+
+    section {
+      padding: 30px 20px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .fixed-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    @media (max-width: 576px) {
+      .branding {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .branding h3 {
+        font-size: 18px;
+      }
+
+      .nav-links {
+        margin-top: 10px;
+      }
+
+      .nav-links a {
+        display: block;
+        margin: 5px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Branding & Navbar -->
+  <div class="container-fluid branding">
+    <img src="{% static 'images/medhini logo.png' %}" alt="Company Logo" />
+    <div class="nav-links">
+      <a href="/">Home</a>
+
+      <div class="dropdown d-inline-block">
+        <a class="dropdown-toggle" href="#" role="button" id="projectDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Projects
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="projectDropdown">
+          <li><a class="dropdown-item" href="/projects/">Ongoing Projects</a></li>
+          <li><a class="dropdown-item" href="#upcoming">Upcoming Projects</a></li>
+        </ul>
+      </div>
+
+      <a href="/gallery/">Gallery</a>
+      <a href="/contact/">Contact</a>
+      {% if user.is_authenticated %}
+        <a href="/logout/">Logout</a>
+      {% else %}
+        <a href="/login/">Login</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Gallery Content -->
+  <section class="container">
+  <!-- Choutuppal -->
+    <h2>Choutuppal Site Images</h2>
+    <div class="row g-3">
+      {% for img in choutuppal_images %}
+        <div class="col-12 col-sm-6 col-md-4">
+          <img src="{{ img.image.url }}" class="img-fluid fixed-image" alt="{{ img.title }}">
+          {% if img.title %}
+            <p class="text-center">{{ img.title }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Yacharam -->
+    <h2>Yacharam Site Images</h2>
+    <div class="row g-3">
+      {% for img in yacharam_images %}
+        <div class="col-12 col-sm-6 col-md-4">
+          <img src="{{ img.image.url }}" class="img-fluid fixed-image" alt="{{ img.title }}">
+          {% if img.title %}
+            <p class="text-center">{{ img.title }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Kothur -->
+    <h2>Kothur Site Images</h2>
+    <div class="row g-3">
+      {% for img in kothur_images %}
+        <div class="col-12 col-sm-6 col-md-4">
+          <img src="{{ img.image.url }}" class="img-fluid fixed-image" alt="{{ img.title }}">
+          {% if img.title %}
+            <p class="text-center">{{ img.title }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Other Images -->
+    <h2>Other Gallery Images</h2>
+    <div class="row g-3">
+      {% for img in other_images %}
+        <div class="col-12 col-sm-6 col-md-4">
+          <img src="{{ img.image.url }}" class="img-fluid fixed-image" alt="{{ img.title }}">
+          {% if img.title %}
+            <p class="text-center">{{ img.title }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
